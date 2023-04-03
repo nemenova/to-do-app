@@ -1,0 +1,41 @@
+.app {
+  display: flex;
+}
+li {
+  /* cursor: pointer; */
+  list-style-type: none;
+}
+ul {
+  padding: 0;
+}
+h2 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 110%;
+  text-align: center;
+  margin: 0;
+}
+h3 {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 110%;
+  margin: 0;
+}
+span {
+  /* font-weight: 400; */
+  font-size: 11px;
+  line-height: 110%;
+  color: #888896;
+}
+input,
+textarea {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  resize: none;
+}
+input,
+textarea:focus-visible {
+  outline: none;
+}

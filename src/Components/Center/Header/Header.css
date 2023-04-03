@@ -1,0 +1,15 @@
+.header {
+  width: calc(100% - 30px);
+  height: 74px;
+  border-bottom: 1px solid #373748;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  min-height: 74px;
+}
+.header__name {
+  display: flex;
+  align-items: baseline;
+  margin: 0 auto;
+}

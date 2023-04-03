@@ -1,0 +1,28 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* padding-bottom: 80px; */
+  position: relative;
+  height: 100vh;
+  /* overflow: hidden; */
+}
+.center__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  padding: 20px 16.35% 50px;
+  overflow: scroll;
+  box-sizing: border-box;
+}
+.center__container::-webkit-scrollbar {
+  display: none;
+}
+.center__title {
+  padding: 0 0 10px 20px;
+}
+.center__span {
+  padding-left: 20px;
+}

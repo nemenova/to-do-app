@@ -1,0 +1,20 @@
+.search__form {
+  border: none;
+  border-top: solid 1px #373748;
+  /* background: url('../Media/Images/Icons/search.svg') 12px left center; */
+  padding: 0 10px;
+  margin-top: auto;
+}
+.search__input {
+  width: 100%;
+  border: none;
+  background-color: #1d1d24;
+  background: url("../../../Media/search.svg") left center;
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
+  padding: 30px 29px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 110%;
+  color: #888896;
+}

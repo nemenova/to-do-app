@@ -1,0 +1,73 @@
+.leftColumnMenu {
+  width: 189px;
+  background: #3859ff;
+  box-shadow: 3px 3px 13px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  position: fixed;
+  top: 0;
+  left: 90%;
+  z-index: 10;
+  padding: 6px;
+}
+
+.leftColumnMenu__title {
+  font-size: 11px;
+  line-height: 110%;
+  color: #ffffff;
+  opacity: 0.5;
+  padding: 8px 15px;
+  box-sizing: border-box;
+  height: 28px;
+}
+.leftColumnMenu__item {
+  font-size: 13px;
+  line-height: 110%;
+  color: #ffffff;
+  height: 38px;
+  /* padding-left: 42px; */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.leftColumnMenu__item:hover {
+  background-color: rgba(28, 18, 91, 0.3);
+  border-radius: 10px;
+}
+.leftColumnMenu__icon {
+  padding: 0 15px;
+}
+.leftColumnMenu__delete {
+  font-size: 13px;
+  line-height: 110%;
+  color: #ffffff;
+  height: 38px;
+  padding-left: 42px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(28, 18, 91, 0.3);
+
+  cursor: pointer;
+}
+.leftColumnMenu__copy {
+  font-size: 13px;
+  line-height: 110%;
+  color: #ffffff;
+  height: 38px;
+  padding-left: 42px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(28, 18, 91, 0.3);
+
+  cursor: pointer;
+}
+.leftColumnMenu__delete:hover,
+.leftColumnMenu__copy:hover {
+  background-color: rgba(28, 18, 91, 0.3);
+  border-radius: 10px;
+}
+.leftColumnMenu__actionBorder {
+  border-top: 1px solid rgba(28, 18, 91, 0.3);
+}
+.leftColumnMenu__actionBorder:first-of-type {
+  border-top: none;
+}
