@@ -1,0 +1,28 @@
+.leftColumnMenu {
+  width: 100px;
+  background: #028ce1;
+  border-radius: 15px;
+  position: fixed;
+  top: 0;
+  left: 90%;
+  z-index: 10;
+  padding: 20px;
+}
+.leftColumnMenu__item {
+  font-size: 13px;
+  line-height: 110%;
+  color: #ffffff;
+  height: 38px;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-top: 1px solid rgba(28, 18, 91, 0.3);
+}
+.leftColumnMenu__item:hover {
+  background-color: rgba(28, 18, 91, 0.3);
+  border-radius: 10px;
+}
+.leftColumnMenu__item:first-of-type {
+  border-top: none;
+}

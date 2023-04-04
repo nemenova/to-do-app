@@ -1,0 +1,21 @@
+.button_active {
+  border: 1px solid #eb455f;
+  color: #fff;
+  cursor: pointer;
+  background-color: #eb455f;
+  border-radius: 10px;
+  padding: 10px;
+  align-self: center;
+  user-select: none;
+  margin: auto 0 30px;
+  justify-self: flex-end;
+}
+.button {
+  border: 1px solid #2b3467;
+  border-radius: 10px;
+  padding: 10px;
+  align-self: center;
+  user-select: none;
+  margin: auto 0 30px;
+  justify-self: flex-end;
+}

@@ -7,27 +7,22 @@ class TreeNode {
         this.tree = tree;
         this.children = [];
         this.id = this.GenerateID();
-        if (this.parent) this.parent.mapId.set(this.id, this);
-        // this.id = id;
-        // if (this.value){
-            this.hasChildren = this.GenerateChildrenAvailable(type);
-            this.hasMethods = this.GenerateMethodsAvailable(type);
-        // }
-       
+        this.hasChildren = this.GenerateChildrenAvailable(type);
+        this.hasMethods = this.GenerateMethodsAvailable(type);
 
-        // if (this.parent) this.parent.mapId.set(this.id, this);
+        if (this.parent) { this.parent.mapId.set(this.id, this) };
+
     }
-    GenerateDefaulValue(type){
-        const newDefaulValue = {...leftColumnConfig.find(item => item.type == type)}
+    GenerateDefaulValue(type) {
+        const newDefaulValue = { ...leftColumnConfig.find(item => item.type == type) }
         return newDefaulValue
-        
     }
     GenerateChildrenAvailable(type) {
-        const foundItem = {...leftColumnConfig.find(item => item.type == type)}
+        const foundItem = { ...leftColumnConfig.find(item => item.type == type) }
         return foundItem.hasChildren
     }
     GenerateMethodsAvailable(type) {
-        const foundItem = {...leftColumnConfig.find(item => item.type == type)}
+        const foundItem = { ...leftColumnConfig.find(item => item.type == type) }
         return foundItem.hasMethods
     }
     GenerateID() {
@@ -35,8 +30,6 @@ class TreeNode {
         var new_index = 1;
         while (true) {
             const generated = this.parent ? this.parent.id + "." + new_index : new_index;
-            console.log(this.parent?.mapId.has(generated))
-
             if (this.parent?.mapId.has(generated)) {
                 new_index++;
                 continue;
@@ -64,33 +57,44 @@ class TreeNode {
     DeleteChildNode(node) {
         return this.children.splice(this.children.indexOf(node), 1);
     }
-   
+
     CopyNode(node) {
         const newNode = new TreeNode(node.value.type, this, this.tree)
-        newNode.value = {...node.value}
+        newNode.value = { ...node.value }
         node.children.forEach(child => newNode.CopyNode(child))
         this.children.push(newNode)
     }
-
     FindNode(id) {
         if (this.id == id) {
             return this;
         }
-
         if (this.children.length > 0) {
             for (let i = 0; i < this.children.length; i++) {
-                // console.log('new root', newRoot)
-
                 const result = this.children[i].FindNode(id)
-                // console.log('result', result)
                 if (result !== null)
                     return result
             }
         }
         return null
+    }
+    FindTask(string) {
+        let searchResults = []
+        if (this.children.length > 0) {
+            for (let i = 0; i < this.children.length; i++) {
+                const result = this.children[i].FindTask(string)
+                if (result !== [])
+                    console.log(result)
+                let newResult = searchResults
+                searchResults = newResult.concat(result)
+            }
+        }
+        if (this.value.name && this.value.name.toLowerCase().includes(string.toLowerCase())) {
+            searchResults.push(this)
+            console.log(searchResults)
+            return this;
+        }
 
-
-
+        return searchResults
 
     }
 }

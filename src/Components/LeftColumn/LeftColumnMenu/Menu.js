@@ -1,13 +1,10 @@
-import React, { useEffect, useContext } from 'react'
-import './Menus.css'
+import React, { useContext } from 'react'
+import './Menu.css'
 import { TreeContext } from '../../../Contexts/TreeContext'
 import leftColumnConfig from '../../../Constants/LeftColumnConfig'
 
 
-const MenuContainer = ({ position, setIsListOpened }) => {
-
-    // console.log(selectedNode)
-    // console.log(selectedNode.value.type)
+const Menu = ({ position, setIsListOpened }) => {
     const { tree, setTree, selectedNode, setSelectedNode } = useContext(TreeContext);
 
     const createChild = (value) => {
@@ -50,24 +47,21 @@ const MenuContainer = ({ position, setIsListOpened }) => {
             <div className='leftColumnMenu' style={{ top: position.top, left: position.left }}>
                 {selectedNode.hasChildren.length > 0 &&
                     <>
-                        <div className='leftColumnMenu__title'>Создать</div>
                         {selectedNode.hasChildren.map((creature, index) => {
                             const item = leftColumnConfig.find(item => item.type === creature)
                             return <div key={index} className={`leftColumnMenu__item leftColumnMenu__${creature}`} onClick={() => createChild(creature)}>
-                                {/* <img src={item.icon.active} alt='' className={`leftColumnMenu__icon`} style={{ width: 12, height: 12, }}></img> */}
                                 {item.displayName}</div>
                         })}
                     </>
                 }
                 {selectedNode.hasMethods &&
                     selectedNode.hasMethods.map((action, index) => (
-                        <div key={index} className={`leftColumnMenu__${action} leftColumnMenu__actionBorder`} onClick={() => onClickAction(action)}>{action}</div>
+                        <div key={index} className={`leftColumnMenu__item`} onClick={() => onClickAction(action)}>{action}</div>
                     ))
                 }
-                {/* {setCreationType(selectedNode.value.type)} */}
             </div>
 
         </>
     )
 }
-export default MenuContainer
+export default Menu

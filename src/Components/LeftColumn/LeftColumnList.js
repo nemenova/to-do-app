@@ -27,14 +27,11 @@ const LeftColumnList = ({ currentTreeList, buttonId, path }) => {
     const draggingChild = item.parent.children.find(child => child.id === item.id)
     const currentIndex = item.parent.children.indexOf(draggingChild)
     console.log(currentIndex)
-
-    // console.log(item.parent.id)
+    console.log(item.parent.id)
     console.log(targetId)
     console.log(targetIndex)
-    // console.log(item.index)
+    console.log(item.index)
     if (item.parent.id == targetId) { // if same parent
-
-
       const newChildren = item.parent.children
       if (targetIndex > currentIndex) {
         newChildren.splice(currentIndex, 1)
@@ -44,20 +41,23 @@ const LeftColumnList = ({ currentTreeList, buttonId, path }) => {
         newChildren.splice(targetIndex, 0, draggingChild)
       }
       // console.log(item.index)
-      console.log(' i dont change parent')
-      console.log(newChildren)
+      // console.log(' i dont change parent')
+      // console.log(newChildren)
+      // selectedNode.parent.children = newChildren
+      console.log(tree)
       setSelectedNode({ ...item })
+      // setTree({...tree})
+      return
     }
-
-
     // if other parent
-    console.log('start search by id', targetId)
-    console.log(tree)
+    // console.log('start search by id', targetId)
+    // console.log(tree)
     const newParent = tree.MainNode.tree.FindNodeById(targetId)
     draggingChild.ChangeParent(newParent, targetIndex)
     console.log('i have changed parent')
     setTree({ ...tree })
   }
+
   const renderGroup = (element, index) => {
     return (
       <LeftColumnGroup
@@ -65,9 +65,12 @@ const LeftColumnList = ({ currentTreeList, buttonId, path }) => {
         setPosition={handleMousePosition}
         element={element}
         position={position}
-        onDrop={handleDrop} />
+        onDrop={handleDrop} 
+        path={`${path}-${index}`}
+        />
     );
   };
+
   return (
     <ul className={`LeftColumn__list ${selectedNode && selectedNode.id === buttonId ? 'active-list' : ''}`} >
       {currentTreeList.children.map((element, index) => {
@@ -81,6 +84,7 @@ const LeftColumnList = ({ currentTreeList, buttonId, path }) => {
                 dropableId: currentTreeList.id,
               }}
               onDrop={handleDrop}
+              path={currentPath}
             />
             {renderGroup(element, index)}
           </React.Fragment>
@@ -88,10 +92,9 @@ const LeftColumnList = ({ currentTreeList, buttonId, path }) => {
       })}
       {currentTreeList.children.length > 0 && <DropZone
         data={{
-          path: `${currentTreeList.children.length}`,
+          path: `${path}-${currentTreeList.children.length}`,
           childrenCount: currentTreeList.children.length,
           dropableId: currentTreeList.id,
-
         }}
         onDrop={handleDrop}
       />}

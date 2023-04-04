@@ -1,20 +1,19 @@
 .longTextInput {
-    height: 150px;
-    background: #BAD7E9;
-    border-radius: 10px;
-    padding: 15px 20px;
-    margin-bottom: 5px;
-    box-sizing: border-box;
-    border: none;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 140%;
-    color: #2B3467;
-    width: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+  height: 150px;
+  background: #bad7e9;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  border: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: #2b3467;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     sans-serif;
-  }
-  .longTextInput::placeholder {
-    color: #747888;
-
-  }
+}
+.longTextInput::placeholder {
+  color: #747888;
+}

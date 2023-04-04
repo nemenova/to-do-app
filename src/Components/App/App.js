@@ -5,76 +5,122 @@ import './App.css';
 
 import { TreeContext } from '../../Contexts/TreeContext';
 
+import { useCookies } from 'react-cookie';
+
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
 import LeftColumn from '../LeftColumn/LeftColumn';
-import LeftColumnList from '../LeftColumn/LeftColumnList';
 import Center from '../Center/Center';
 
 import Tree from '../Tree/Tree'
-import leftColumnConfig from '../../Constants/LeftColumnConfig';
 
 
-var isTreeEmpty = true
+
 function App() {
-  const [modalElement, setModalElement] = useState(undefined);
-  const [currentTreeList, setCurrentTreeList] = useState(undefined)
+  const [cookies, setCookie, removeCookie] = useCookies(['tree', 'searchLine'])
+
   const [tree, setTree] = useState(undefined);
   const [selectedNode, setSelectedNode] = useState(undefined);
-  const [error, setError] = useState({ type: undefined, message: '', status: false });
-  // const [errorText, setErrorText] = useState('');
-  const [isListOpened, setIsListOpened] = useState(false)
+  const [request, setRequest] = useState(cookies.searchLine ? cookies.searchLine : '')
 
-  // console.log(activeZone)
-  // console.log(currentTreeList)
+  useEffect(() => {
+    if (tree) {
+      setCookie('tree', stringify(tree), { maxAge: 60 * 60 * 1000 });
+    }
+    console.log(tree)
+  }, [tree, selectedNode])
 
+  useEffect(() => {
+    if (request) {
+      setCookie('searchLine', request, { maxAge: 60 * 60 * 1000 });
+    } else if (cookies.searchLine && !request) {
+      removeCookie('searchLine')
+    }
+  }, [request])
+
+  console.log(cookies.tree)
+  // console.log(request)
+
+  function stringify(obj) {
+    let cache = [];
+    let str = JSON.stringify(obj, function (key, value) {
+      console.log(value)
+      if (typeof (value) === "object" && value !== null) {
+        if (cache.indexOf(value) !== -1) {
+          return;
+        }
+        cache.push(value);
+      }
+      return value;
+    });
+    cache = null;
+    return str;
+  }
 
   useEffect(() => {
     if (!tree) {
-      // const mainNodeConfig = leftColumnConfig.find('MainNode')
-      // console.log(mainNodeConfig)
       const tree = new Tree('MainNode')
       const node = tree.MainNode
-      console.log(node)
+      // console.log(node)
       setTree(tree)
-      node.hasChildren.map(button => node.AddChild(button))
-    } else {
-      setTree(tree)
+      if (cookies.tree) {
+        cookies.tree.MainNode.children.forEach(child => copyStructure(child, node))
+        // console.log(cookies.tree.MainNode.children)
+        node.value.name = cookies.tree.MainNode.value.name
+        
+        // copyValues(cookies.tree.MainNode.children, node.children)
+        // setTree({ ...tree })
+      }
     }
   }, [tree])
 
-  console.log(tree)
-  // console.log(isError)
+  // console.log(tree)
 
   const copyStructure = (node, parentNode) => {
-    console.log(node)
-    console.log(parentNode)
-    if (!node || !node.SectionType) {
-      setError({ type: 'tree', message: "Something went wrong! Contact with technical support", status: true })
-      console.log('ERROR! now node is', node)
-      setTree({})
-    }
-    parentNode.AddChild(node.SectionType, node.id)
-
-
+    // console.log('processing child', node)
+    // console.log(parentNode)
+    parentNode.AddChild(node.value.type, node.id)
     const newNode = parentNode.children.find(element => element.id == node.id)
+
+    // for (let i = 0; i < node.children.length; i++) {
+    //   parentNode.children[i].value = node.children[i].value;
+    //   parentNode.children[i].children = node.children[i].children;
+    //   copyStructure(node.children[i], parentNode.children[i])
+    //   // console.log(parentNodeChildren[i])
+    //   // console.log(cookieChildren[i])
+      
+    // }
+
     console.log(newNode)
     if (newNode) {
       console.log(newNode.value)
-      newNode.value.title = node.Name
-      newNode.value.Name = node.Name
-      newNode.value.Description = node.Description
-      newNode.value.Date = node.Date
-      newNode.value.Gallery = node.Gallery
-      newNode.isValid = node.IsValid
-      newNode.value.Preview = node.Preview
+      newNode.value = node.value
+
     }
-    if (node.Sections && node.Sections.length > 0) {
-      node.Sections.forEach(element => {
+    if (node.children && node.children.length > 0) {
+      node.children.forEach(element => {
         copyStructure(element, newNode)
       });
     }
+  }
+
+  const copyValues = (cookieChildren, parentNodeChildren) => {
+    if (cookieChildren.length === parentNodeChildren.length){
+      for (let i = 0; i < cookieChildren.length; i++) {
+        parentNodeChildren[i].value = cookieChildren[i].value;
+        parentNodeChildren[i].children = cookieChildren[i].children;
+        console.log(parentNodeChildren[i])
+        console.log(cookieChildren[i])
+        if (parentNodeChildren[i].children && parentNodeChildren[i].length > 0) {
+          copyValues(cookieChildren[i].children, parentNodeChildren[i].children)
+        }
+      }
+    }
+   
+
+
+
   }
 
   return (
@@ -88,14 +134,8 @@ function App() {
               <Route path='/'
                 element={
                   <>
-                    {/* {tree.MainNode.children.length > 0 &&
-                      <LeftColumnList
-                        currentTreeList={tree.MainNode}
-                        buttonId={tree.MainNode.id}
-                        />
-                    } */}
-                    <LeftColumn isListOpened={isListOpened} setIsListOpened={setIsListOpened} />
-                    <Center setIsListOpened={setIsListOpened} />
+                    <LeftColumn setRequest={setRequest} request={request} />
+                    <Center />
                   </>} />
             </Routes>
           </div>

@@ -5,39 +5,30 @@ import Header from './Header/Header'
 import ShortText from './ShortText/ShortText'
 import LongText from './LongText/LongText'
 import Checkbox from './Checkbox/Checkbox'
-const Center = ({ callModal }) => {
+import Button from '../Button/Button'
 
+const Center = () => {
     const { selectedNode, setSelectedNode } = useContext(TreeContext);
-    // console.log(selectedNode)
-    const [errorMessages, setErrorMessages] = useState([])
     const [hasChanges, setHasChanges] = useState(false)
 
     useEffect(() => {
-        setErrorMessages([])
         setHasChanges(false)
     }, [selectedNode])
 
-    // console.log(hasChanges)
-    // console.log(errorMessages)
-    console.log(selectedNode)
-
     const saveInfo = () => {
+        selectedNode.value.name = selectedNode.value.unsavedName
+        selectedNode.value.description = selectedNode.value.unsavedDescription
+        selectedNode.value.isDone = selectedNode.value.unsavedIsDone
+
         setSelectedNode({ ...selectedNode })
         setHasChanges(false)
     }
-
-
-
-
 
     return (
         <>
             <section className='center'>
                 <Header />
                 <div className='center__container'>
-                    {/* {selectedNode && selectedNode.value.fields && selectedNode.value.fields.map((field, index) => (
-                        <CenterBlock field={field} key={index} callModal={callModal} setHasChanges={setHasChanges} />
-                    ))} */}
                     {selectedNode &&
                         <>
                             <div className='center__block'>
@@ -51,12 +42,11 @@ const Center = ({ callModal }) => {
                             </div>
                             <div className='center__block'>
                                 <h3 className='center__title'>Mark as done</h3>
-                                <Checkbox setHasChanges={setHasChanges}/>
+                                <Checkbox setHasChanges={setHasChanges} />
                             </div>
                         </>
                     }
-                    {selectedNode && <div style={{ border: `${hasChanges ? '1px solid #EB455F' : '1px solid #2B3467'}`, color: `${hasChanges ? '#fff' : 'inherit'}`, borderRadius: 10, padding: 10, cursor: `${hasChanges ? 'pointer' : ''}`, width: 'min-content', alignSelf: 'center', backgroundColor: `${hasChanges ? '#EB455F' : 'transparent'}`, userSelect: 'none' }} onClick={() => saveInfo()}>Сохранить</div>}
-
+                    {selectedNode && <Button buttonText={'Save'} onClickAction={saveInfo} isActive={hasChanges}/>}
                 </div>
             </section>
 

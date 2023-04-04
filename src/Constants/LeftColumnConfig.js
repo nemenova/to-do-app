@@ -2,8 +2,6 @@ const leftColumnConfig = [
     {
         type: 'MainNode',
         hasChildren: ['task'],
-       
-
     },
     {
         title: 'Task',
@@ -13,7 +11,6 @@ const leftColumnConfig = [
         hasChildren: ['subtask'],
         hasMethods: ['delete', 'copy'],
         isDone: false,
-   
     },
     {
         title: 'Subtask',
