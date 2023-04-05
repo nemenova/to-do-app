@@ -39,13 +39,12 @@ function App() {
     }
   }, [request])
 
-  console.log(cookies.tree)
+  // console.log(cookies.tree)
   // console.log(request)
 
   function stringify(obj) {
     let cache = [];
     let str = JSON.stringify(obj, function (key, value) {
-      console.log(value)
       if (typeof (value) === "object" && value !== null) {
         if (cache.indexOf(value) !== -1) {
           return;
@@ -62,15 +61,10 @@ function App() {
     if (!tree) {
       const tree = new Tree('MainNode')
       const node = tree.MainNode
-      // console.log(node)
       setTree(tree)
       if (cookies.tree) {
         cookies.tree.MainNode.children.forEach(child => copyStructure(child, node))
-        // console.log(cookies.tree.MainNode.children)
         node.value.name = cookies.tree.MainNode.value.name
-        
-        // copyValues(cookies.tree.MainNode.children, node.children)
-        // setTree({ ...tree })
       }
     }
   }, [tree])
@@ -78,25 +72,11 @@ function App() {
   // console.log(tree)
 
   const copyStructure = (node, parentNode) => {
-    // console.log('processing child', node)
-    // console.log(parentNode)
-    parentNode.AddChild(node.value.type, node.id)
-    const newNode = parentNode.children.find(element => element.id == node.id)
+    parentNode.AddChild(node.value.type)
+    const newNode = parentNode.children.at(-1)
 
-    // for (let i = 0; i < node.children.length; i++) {
-    //   parentNode.children[i].value = node.children[i].value;
-    //   parentNode.children[i].children = node.children[i].children;
-    //   copyStructure(node.children[i], parentNode.children[i])
-    //   // console.log(parentNodeChildren[i])
-    //   // console.log(cookieChildren[i])
-      
-    // }
-
-    console.log(newNode)
     if (newNode) {
-      console.log(newNode.value)
       newNode.value = node.value
-
     }
     if (node.children && node.children.length > 0) {
       node.children.forEach(element => {
@@ -105,23 +85,6 @@ function App() {
     }
   }
 
-  const copyValues = (cookieChildren, parentNodeChildren) => {
-    if (cookieChildren.length === parentNodeChildren.length){
-      for (let i = 0; i < cookieChildren.length; i++) {
-        parentNodeChildren[i].value = cookieChildren[i].value;
-        parentNodeChildren[i].children = cookieChildren[i].children;
-        console.log(parentNodeChildren[i])
-        console.log(cookieChildren[i])
-        if (parentNodeChildren[i].children && parentNodeChildren[i].length > 0) {
-          copyValues(cookieChildren[i].children, parentNodeChildren[i].children)
-        }
-      }
-    }
-   
-
-
-
-  }
 
   return (
     tree &&

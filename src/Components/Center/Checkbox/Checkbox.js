@@ -6,7 +6,7 @@ import { TreeContext } from '../../../Contexts/TreeContext';
 
 const Checkbox = ({ setHasChanges }) => {
     const { selectedNode } = useContext(TreeContext);
-    const [isChecked, setIsChecked] = useState(selectedNode.value.isDone ? true : false);
+    const [isChecked, setIsChecked] = useState(selectedNode.value.isDone);
 
     const handleCheck = (e) => {
         setIsChecked(e.target.checked)
@@ -24,7 +24,7 @@ const Checkbox = ({ setHasChanges }) => {
         <>
 
             <label className="checkbox__label">
-                <input type="checkbox" className="checkbox" checked={isChecked} onChange={(e) => { handleCheck(e) }} />
+                <input type="checkbox" className="checkbox" checked={isChecked} value={isChecked} onChange={(e) => { handleCheck(e) }} />
                 <div className='checkbox__knobs'></div>
                 <div className='checkbox__layer'></div>
 
