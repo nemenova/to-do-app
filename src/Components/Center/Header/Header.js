@@ -2,8 +2,8 @@ import React, { useState, useContext, useEffect } from 'react'
 import './Header.css'
 import { TreeContext } from '../../../Contexts/TreeContext'
 
-const Header = ({ }) => {
-    const { selectedNode, setSelectedNode } = useContext(TreeContext);
+const Header = () => {
+    const { selectedNode} = useContext(TreeContext);
     const [title, setTitle] = useState(selectedNode ? selectedNode.value.name ? selectedNode.value.name : selectedNode.value.displayName : '')
 
     useEffect(() => {
