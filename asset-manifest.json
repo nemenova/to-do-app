@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/to-do-app/static/css/main.4f80ab09.css",
-    "main.js": "/to-do-app/static/js/main.6c6138fd.js",
+    "main.js": "/to-do-app/static/js/main.babd583d.js",
     "static/js/787.5e141d9e.chunk.js": "/to-do-app/static/js/787.5e141d9e.chunk.js",
     "static/media/leftMenu.svg": "/to-do-app/static/media/leftMenu.f1e336cda3761a76ab5a.svg",
     "static/media/search.svg": "/to-do-app/static/media/search.642df533acc7de378d23.svg",
@@ -9,11 +9,11 @@
     "static/media/closedList.svg": "/to-do-app/static/media/closedList.7bfc072dfbe9d0762123.svg",
     "static/media/openedList.svg": "/to-do-app/static/media/openedList.2cbd54724ce5739c048e.svg",
     "main.4f80ab09.css.map": "/to-do-app/static/css/main.4f80ab09.css.map",
-    "main.6c6138fd.js.map": "/to-do-app/static/js/main.6c6138fd.js.map",
+    "main.babd583d.js.map": "/to-do-app/static/js/main.babd583d.js.map",
     "787.5e141d9e.chunk.js.map": "/to-do-app/static/js/787.5e141d9e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4f80ab09.css",
-    "static/js/main.6c6138fd.js"
+    "static/js/main.babd583d.js"
   ]
 }
