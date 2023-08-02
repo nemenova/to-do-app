@@ -93,14 +93,8 @@ function App() {
         <DndProvider backend={HTML5Backend}>
 
           <div className='app'>
-            <Routes>
-              <Route path='/'
-                element={
-                  <>
-                    <LeftColumn setRequest={setRequest} request={request} />
-                    <Center />
-                  </>} />
-            </Routes>
+            <LeftColumn setRequest={setRequest} request={request} />
+            <Center />
           </div>
         </DndProvider>
       </TreeContext.Provider>
